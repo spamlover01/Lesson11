@@ -1,0 +1,180 @@
+# adminapplayout.kv (исправления по макету)
+<AdminAppLayout>:
+    orientation: 'vertical'
+    spacing: dp(6)
+    padding: dp(6)
+
+    # --- Верхняя панель ---
+    BoxLayout:
+        size_hint_y: None
+        height: dp(36)
+        spacing: dp(6)
+        Button:
+            text: 'Файл'
+            size_hint: None, None
+            size: dp(100), dp(36)
+            on_release: app.file_dropdown.open(self)
+        Button:
+            text: 'Админка'
+            size_hint: None, None
+            size: dp(100), dp(36)
+            on_release: app.admin_dropdown.open(self)
+
+    BoxLayout:
+        orientation: 'horizontal'
+        spacing: dp(6)
+
+        # --- Левая часть (Таблица 1, графики) ---
+        BoxLayout:
+            orientation: 'vertical'
+            spacing: dp(6)
+            size_hint_x: 0.65
+
+            GridLayout:
+                cols: 4
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(5)
+
+                FilterInput:
+                    id: filter_consumer
+                    hint_text: 'Потребитель'
+                    app: app
+                FilterInput:
+                    id: filter_address
+                    hint_text: 'Адрес'
+                    app: app
+                FilterInput:
+                    id: filter_pu_no
+                    hint_text: '№ ПУ'
+                    app: app
+                FilterInput:
+                    id: filter_contract
+                    hint_text: '№ Договора'
+                    app: app
+                FilterInput:
+                    id: filter_coeff
+                    hint_text: 'Коэфф'
+                    app: app
+                FilterInput:
+                    id: filter_file
+                    hint_text: 'Файл'
+                    app: app
+                FilterInput:
+                    id: filter_year
+                    hint_text: 'Год'
+                    app: app
+                BoxLayout:
+                    spacing: dp(5)
+                    Button:
+                        text: 'Сбросить'
+                        on_release: app.reset_filters_query1()
+                    Button:
+                        text: 'Применить'
+                        on_release: app.apply_filters_query1()
+
+            Label:
+                id: year_month_status_label
+                text: 'Примените фильтры для отображения данных.'
+                size_hint_y: None
+                height: dp(24)
+
+            BoxLayout:
+                orientation: 'horizontal'
+                spacing: dp(6)
+                size_hint_y: None
+                height: dp(330)
+
+                GridLayout:
+                    id: year_month_grid_container
+                    cols: 7
+                    size_hint_x: 0.65
+                    row_default_height: dp(25)
+                    row_force_default: True
+                    spacing: dp(2)
+
+                Label:
+                    text: 'Заглушка: информация о потребителе\n(ПУ, адрес, наименование)'
+                    size_hint_x: 0.35
+                    halign: 'center'
+                    valign: 'middle'
+                    text_size: self.size
+
+            BoxLayout:
+                size_hint_y: None
+                height: dp(160)
+                spacing: dp(5)
+                Image:
+                    id: chart_image_1
+                Image:
+                    id: chart_image_2
+                Image:
+                    id: chart_image_3
+
+        # --- Правая часть (Таблица 2) ---
+        BoxLayout:
+            orientation: 'vertical'
+            size_hint_x: 0.35
+            spacing: dp(6)
+
+            GridLayout:
+                cols: 2
+                size_hint_y: None
+                height: self.minimum_height
+                spacing: dp(5)
+
+                FilterInput:
+                    id: filter2_1
+                    hint_text: 'Фильтр 1 (Таблица 2)'
+                    app: app
+                FilterInput:
+                    id: filter2_2
+                    hint_text: 'Фильтр 2 (Таблица 2)'
+                    app: app
+                FilterInput:
+                    id: filter2_3
+                    hint_text: 'Фильтр 3 (Таблица 2)'
+                    app: app
+                FilterInput:
+                    id: filter2_4
+                    hint_text: 'Фильтр 4 (Таблица 2)'
+                    app: app
+
+            Label:
+                id: data_table_query2_content
+                text: 'Вывод из фильтров таблицы 2.\nПока можем не трогать.'
+                text_size: self.size
+                halign: 'left'
+                valign: 'top'
+                padding: dp(6), dp(6)
+                markup: True
+
+    TabbedPanel:
+        do_default_tab: False
+        size_hint_y: None
+        height: dp(40)
+
+        TabbedPanelItem:
+            text: "Общий анализ"
+            Label:
+                text: "Основная вкладка"
+
+        TabbedPanelItem:
+            text: "Вкладка 2"
+            Label:
+                text: "Пока пусто."
+
+        TabbedPanelItem:
+            text: "Вкладка 3"
+            Label:
+                text: "Пока пусто."
+
+        TabbedPanelItem:
+            text: "Вкладка 4"
+            Label:
+                text: "Пока пусто."
+
+        TabbedPanelItem:
+            text: "Вкладка 5"
+            Label:
+                text: "Пока пусто."

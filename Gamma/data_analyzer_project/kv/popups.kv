@@ -1,0 +1,69 @@
+# popups.kv
+<FileChooserPopup>:
+    title: 'Выберите CSV файл'
+    size_hint: 0.9, 0.9
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(6)
+        padding: dp(8)
+
+        FileChooserListView:
+            id: filechooser
+            filters: ['*.csv']
+            multiselect: False
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(40)
+            spacing: dp(8)
+            Button:
+                text: 'Выбрать'
+                on_release: root.select_file(filechooser.path, filechooser.selection)
+            Button:
+                text: 'Отмена'
+                on_release: root.dismiss()
+
+<SQLQuerySettingsPopup>:
+    title: 'SQL-запросы (только для администратора)'
+    size_hint: 0.9, 0.9
+    auto_dismiss: False
+
+    BoxLayout:
+        orientation: 'vertical'
+        spacing: dp(6)
+        padding: dp(8)
+
+        Label:
+            text: 'Запрос 1:'
+            size_hint_y: None
+            height: dp(24)
+
+        TextInput:
+            id: sql_query1_input
+            text: app.sql_query1_text
+            multiline: True
+
+        Label:
+            text: 'Запрос 2:'
+            size_hint_y: None
+            height: dp(24)
+
+        TextInput:
+            id: sql_query2_input
+            text: app.sql_query2_text
+            multiline: True
+
+        BoxLayout:
+            size_hint_y: None
+            height: dp(44)
+            spacing: dp(8)
+            Button:
+                text: 'Сохранить'
+                on_release:
+                    app.save_sql_queries(sql_query1_input.text, sql_query2_input.text)
+                    root.dismiss()
+            Button:
+                text: 'Отмена'
+                on_release: root.dismiss()
